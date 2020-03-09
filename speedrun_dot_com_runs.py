@@ -10,7 +10,7 @@ import time_to_string
 from speedrun import Speedrun
 
 batchSize = 20 # if you change this, you need to change the url to include a numResults
-def getNewWRs(oldestDate):
+def getNewWRs(oldestDate) -> Speedrun:
     count = 0;
     result = []
 

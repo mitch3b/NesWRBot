@@ -10,17 +10,19 @@ import math
 import time_to_string
 from speedrun import Speedrun
 
-def getWRs():
+def getWRs() -> Speedrun:
     result = []
-    result.extend(getNewWRs(1))
-    #result.extend(getNewWRs(2))
-    #result.extend(getNewWRs(3))
-    #result.extend(getNewWRs(4))
-    #result.extend(getNewWRs(5))
-    #result.extend(getNewWRs(6))
+
+    result.extend(_getNewWRs(1))
+    #result.extend(_getNewWRs(2))
+    #result.extend(_getNewWRs(3))
+    #result.extend(_getNewWRs(4))
+    #result.extend(_getNewWRs(5))
+    #result.extend(_getNewWRs(6))
+
     return result;
 
-def getNewWRs(gameNum):
+def _getNewWRs(gameNum):
     url = "http://megamanleaderboards.net/api/records.php?game=" + str(gameNum)
     response = requests.get(url)
     if response.status_code != 200:
@@ -32,9 +34,9 @@ def getNewWRs(gameNum):
         try:
             runId = str(record["id"])
             game = "Megaman " + str(record["game_id"])
-            runners = [getUsername(record["user_id"])]
+            runners = [_getUsername(record["user_id"])]
             category = record["category"]
-            time = timeToString(record["time"])
+            time = _timeToString(record["time"])
             link = record["video"]
 
             speedrun = Speedrun(runId, runners, game, category, time, link)
@@ -48,7 +50,7 @@ def getNewWRs(gameNum):
 
 #lots of records are held by the same folks and this api is already flaky so save some calls
 userCache = {}
-def getUsername(userId):
+def _getUsername(userId):
     return "fakeUser" + st(userId)
     if userId in userCache:
         return userCache[userId]
@@ -65,6 +67,6 @@ def getUsername(userId):
     return user
 
 
-def timeToString(time):
+def _timeToString(time):
     totalSeconds = math.floor(time/100)
     return time_to_string.fromTotalSeconds(totalSeconds)

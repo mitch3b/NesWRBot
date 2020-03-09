@@ -6,8 +6,9 @@
 import tweepy
 import exclamations
 import stored_values
+from speedrun import Speedrun
 
-def tweet(speedrun):
+def tweet(speedrun: Speedrun):
     content = _getTweetString(speedrun)
     print("Posting this to twitter: " + content)
 
@@ -23,7 +24,7 @@ def tweet(speedrun):
     # update the status
     api.update_status(status = content)
 
-def _getTweetString(speedrun):
+def _getTweetString(speedrun: Speedrun):
     people = speedrun.getRunnersAsString()
 
     return exclamations.getExclamation() + " " + people +  " got the world record in " + speedrun.game + " - " + speedrun.category + " with a time of " + speedrun.time + "! " + speedrun.link
