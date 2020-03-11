@@ -32,9 +32,9 @@ def run():
 
     # Megaman leaderboards don't have dates for runs so we can't age out the record of publishing
     # This api is struggling lately so skip it
-    #print("Processing megamanleaderboards.com...")
-    #postWrs(megaman_runs.getWRs(), False)
-    #print("Processing megamanleaderboards.com complete.")
+    print("Processing megamanleaderboards.com...")
+    postWrs(megaman_runs.getWRs(), False)
+    print("Processing megamanleaderboards.com complete.")
 
 def postWrs(wrs, withTTL):
     tweetCount = 0

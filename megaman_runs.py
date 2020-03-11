@@ -14,16 +14,16 @@ def getWRs() -> Speedrun:
     result = []
 
     result.extend(_getNewWRs(1))
-    #result.extend(_getNewWRs(2))
-    #result.extend(_getNewWRs(3))
-    #result.extend(_getNewWRs(4))
-    #result.extend(_getNewWRs(5))
-    #result.extend(_getNewWRs(6))
+    result.extend(_getNewWRs(2))
+    result.extend(_getNewWRs(3))
+    result.extend(_getNewWRs(4))
+    result.extend(_getNewWRs(5))
+    result.extend(_getNewWRs(6))
 
     return result;
 
 def _getNewWRs(gameNum):
-    url = "http://megamanleaderboards.net/api/records.php?game=" + str(gameNum)
+    url = "https://megamanleaderboards.net/api/records.php?game=" + str(gameNum)
     response = requests.get(url)
     if response.status_code != 200:
       raise Exception("Failed to get response from: " + url)
@@ -51,12 +51,10 @@ def _getNewWRs(gameNum):
 #lots of records are held by the same folks and this api is already flaky so save some calls
 userCache = {}
 def _getUsername(userId):
-    return "fakeUser" + st(userId)
     if userId in userCache:
         return userCache[userId]
 
-    print("fetching username for id: " + userId)
-    url = "http://megamanleaderboards.net/api/users.php?user=" + str(userId)
+    url = "https://megamanleaderboards.net/api/users.php?user=" + str(userId)
 
     response = requests.get(url)
     if response.status_code != 200:
