@@ -42,11 +42,10 @@ def postWrs(wrs, withTTL):
 
     for speedrun in wrs:
         try:
-            if stored_values.runWasAlreadyDiscorded(speedrun.runId):
+            if not stored_values.runWasAlreadyDiscorded(speedrun.runId):
                 discorder.post(speedrun)
                 stored_values.markRunAlreadyDiscorded(speedrun.runId, withTTL)
                 discordCount += discordCount
-                return
         except Exception as err:
             print("Issue posting wr {} to discord with err: {}".format(speedrun, err))
 
