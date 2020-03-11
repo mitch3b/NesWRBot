@@ -4,17 +4,18 @@
 """ This class holds the fields required to post about a given speedrun.
 """
 class Speedrun:
-    def __init__(self, runId, runners, game, category, time, link):
+    def __init__(self, runId, runners, game, category, time, link, video):
         self.runId = runId
         self.runners = runners
         self.game = game
         self.category = category
         self.time = time
         self.link = link
+        self.video = video
 
 
     def __str__(self):
-        return "[ runId: " + self.runId + ", runners: " + str(self.runners) + ", game: " + self.game + " , category: " + self.category + ", time:" + self.time + ", link:" + self.link + "]";
+        return "[ runId: " + self.runId + ", runners: " + str(self.runners) + ", game: " + self.game + " , category: " + self.category + ", time:" + self.time + ", link:" + self.link + ", video: " + self.video + "]";
 
     def getRunnersAsString(self):
         people = self.runners[0]

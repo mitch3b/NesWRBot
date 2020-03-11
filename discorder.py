@@ -11,7 +11,7 @@ from speedrun import Speedrun
 webhookUrl = stored_values.getConfig()["Discord"]["webhookUrl"]
 
 def post(speedrun: Speedrun):
-    content = getTweetString(speedrun)
+    content = _getPostString(speedrun)
     print("Posting this to discord: " + content)
 
     myobj = {'content': content}
@@ -22,7 +22,7 @@ def post(speedrun: Speedrun):
         raise Exception("Failed to post with code {} to discord. Content: {}".format(x.status_code, content))
 
 # Consider making this better: https://leovoel.github.io/embed-visualizer/
-def getTweetString(speedrun: Speedrun):
+def _getPostString(speedrun: Speedrun):
     people = speedrun.getRunnersAsString()
 
-    return exclamations.getExclamation() + " " + people +  " got the world record in " + speedrun.game + " - " + speedrun.category + " with a time of " + speedrun.time + "! " + speedrun.link
+    return "Runner: **" + people +  "**\nGame:   **" + speedrun.game + " - " + speedrun.category + "**\nTime:     **" + speedrun.time + "**!\nLeaderboard: <" + speedrun.link + ">\n" + speedrun.video

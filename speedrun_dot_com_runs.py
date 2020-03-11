@@ -40,9 +40,10 @@ def getNewWRs(oldestDate) -> Speedrun:
                         runners = _parsePlayers(run["players"])
                         game = gameObj["name"]
                         time = time_to_string.fromTotalSeconds(run["times"]["primary_t"])
-                        link = run["weblink"] # could also just link directly to the video
+                        link = run["weblink"]
+                        video = run["videos"]["links"][0]["uri"]
 
-                        speedrun = Speedrun(runId, runners, game, category, time, link)
+                        speedrun = Speedrun(runId, runners, game, category, time, link, video)
                         print("Adding src gameid: " + run["game"] + ",  run: " + str(speedrun))
                         result.append(speedrun)
             except RuntimeError as err:

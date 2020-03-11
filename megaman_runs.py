@@ -37,9 +37,11 @@ def _getNewWRs(gameNum):
             runners = [_getUsername(record["user_id"])]
             category = record["category"]
             time = _timeToString(record["time"])
-            link = record["video"]
+            link = "https://megamanleaderboards.net/index.php?game=" + str(gameNum)
+            video = record["video"]
+            
 
-            speedrun = Speedrun(runId, runners, game, category, time, link)
+            speedrun = Speedrun(runId, runners, game, category, time, link, video)
             print("Adding src gameid: " + str(gameNum) + ",  run: " + str(speedrun))
             result.append(speedrun)
         except Exception as err:
