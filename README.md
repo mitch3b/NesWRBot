@@ -63,17 +63,19 @@ If you install the dependencies with the rest of this code, it'll get super mess
 prefix=
 ```
 * Install the dependencies to a local folder (no need for boto3 as it comes with lambda automagically)
-** pip3 install requests -t .
-** pip3 install tweepy -t .
+ * pip3 install requests -t .
+ * pip3 install tweepy -t .
 * cd .. (so you now are in a folder with only a 'python' folder
-* zip -g function.zip -r *
+* git archive -o function.zip @
 * Create a layer in aws and upload this zip file.
 * In your lambda function, add the layer relationship. You should now be able to reference tweepy and requests
 
 #### Deploy code to lambda
 To build/deploy the actual code, go into the code directory and (modify params depending on your function name):
-* zip -g function.zip -r *
-* aws lambda update-function-code --function-name speedrunTweetBot --zip-file fileb://function.zip
+```
+git archive -o function.zip @
+aws lambda update-function-code --function-name speedrunTweetBot --zip-file fileb://function.zip
+```
 
 ## TODO
 * Megaman - until the api is more stable, need to leave this off
