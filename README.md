@@ -78,7 +78,6 @@ aws lambda update-function-code --function-name speedrunTweetBot --zip-file file
 ```
 
 ## TODO
-* Megaman - until the api is more stable, need to leave this off
 * Code Deploy
 * Handle some situations better (ie if someone tied the WR or beat their own, might want a slightly different message)
 * Make discord (and maybe tweet) look nicer.
