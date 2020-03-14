@@ -28,7 +28,7 @@ def getNewWRs(oldestDate) -> Speedrun:
 
                 if date is None:
                     raise RuntimeError("Run didn't have a date: " + playerJson);
-                if category is None or "Lose" in category:
+                if category is None or "Lose" in category["name"] or category["miscellaneous"]:
                     continue #Don't process this, but move on to the next run
                 elif date < oldestDate:
                     return result
@@ -43,7 +43,7 @@ def getNewWRs(oldestDate) -> Speedrun:
                         link = run["weblink"]
                         video = run["videos"]["links"][0]["uri"]
 
-                        speedrun = Speedrun(runId, runners, game, category, time, link, video)
+                        speedrun = Speedrun(runId, runners, game, category["name"], time, link, video)
                         print("Adding src gameid: " + run["game"] + ",  run: " + str(speedrun))
                         result.append(speedrun)
             except RuntimeError as err:
@@ -116,7 +116,11 @@ def _getGameFromId(id):
     return result
 
 def _getCategoryFromId(id):
-    result = _getJsonData("https://www.speedrun.com/api/v1/categories/" + id)["name"]
+    response = _getJsonData("https://www.speedrun.com/api/v1/categories/" + id)
+    
+    result = {}
+    result["name"] = response["name"]
+    result["miscellaneous"] = response["miscellaneous"]
 
     if result is None:
         raise RuntimeError("Couldn't find category from id: " + id)
